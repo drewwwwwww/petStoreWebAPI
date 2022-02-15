@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\petStoreWebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj": {}
+    "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\WebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\petStoreWebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj": {
+    "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\WebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\petStoreWebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\WebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj",
         "projectName": "petStoreWebAPI",
-        "projectPath": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\petStoreWebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj",
+        "projectPath": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\WebAPI\\petStoreWebAPI\\petStoreWebAPI.csproj",
         "packagesPath": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\petStoreWebAPI\\petStoreWebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\source\\repos\\WebAPI\\petStoreWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Taylor Tillman.DESKTOP-JBROIEH\\AppData\\Roaming\\NuGet\\NuGet.Config",
