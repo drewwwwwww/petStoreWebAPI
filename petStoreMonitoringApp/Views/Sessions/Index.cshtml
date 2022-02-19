@@ -1,0 +1,59 @@
+﻿@model IEnumerable<petStoreMonitoringApp.Models.Session>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PageID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start_TimeStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.End_TimeStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request_TimeStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start_TimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End_TimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Request_TimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SessionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SessionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SessionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
