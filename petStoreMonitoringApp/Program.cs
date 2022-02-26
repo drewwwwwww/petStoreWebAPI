@@ -37,7 +37,7 @@ namespace petStoreMonitoringApp
 
                 var _context = services.GetService<petStoreMonitoringAppContext>();
                 var _env = services.GetService<IWebHostEnvironment>();
-                _context.Database.EnsureCreated(); 
+                //_context.Database.EnsureCreated(); 
             }
         }
     }
