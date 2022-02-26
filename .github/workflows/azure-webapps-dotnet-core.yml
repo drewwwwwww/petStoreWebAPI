@@ -1,13 +1,14 @@
 name: Build and deploy .NET solution to Web API and MVC Azure App Services
 
 env:
-  AZURE_WEBAPP_NAME: 'SE2MonitoringWebAPI'
+  API_AZURE_WEBAPP_NAME: 'SE2MonitoringWebAPI'
+  MVC_AZURE_WEBAPP_NAME: 'MonitoringMvcWebApp'
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0.x'
-  # TODO: Replace publish-profile values with ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} and configure as a GitHub secret
   API_PUBLISH_PROFILE: '<publishData><publishProfile profileName="SE2MonitoringWebAPI - Web Deploy" publishMethod="MSDeploy" publishUrl="se2monitoringwebapi.scm.azurewebsites.net:443" msdeploySite="SE2MonitoringWebAPI" userName="$SE2MonitoringWebAPI" userPWD="D94dSpgMigbBYopj0aHu0hlaGYP9bT95gxqfgT1lsR5jdXZNcGew496KcCYd" destinationAppUrl="http://se2monitoringwebapi.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="SE2MonitoringWebAPI - FTP" publishMethod="FTP" publishUrl="ftp://waws-prod-blu-263.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="SE2MonitoringWebAPI\$SE2MonitoringWebAPI" userPWD="D94dSpgMigbBYopj0aHu0hlaGYP9bT95gxqfgT1lsR5jdXZNcGew496KcCYd" destinationAppUrl="http://se2monitoringwebapi.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="SE2MonitoringWebAPI - Zip Deploy" publishMethod="ZipDeploy" publishUrl="se2monitoringwebapi.scm.azurewebsites.net:443" userName="$SE2MonitoringWebAPI" userPWD="D94dSpgMigbBYopj0aHu0hlaGYP9bT95gxqfgT1lsR5jdXZNcGew496KcCYd" destinationAppUrl="http://se2monitoringwebapi.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>'
   MVC_PUBLISH_PROFILE: '<publishData><publishProfile profileName="MonitoringMvcWebApp - Web Deploy" publishMethod="MSDeploy" publishUrl="monitoringmvcwebapp.scm.azurewebsites.net:443" msdeploySite="MonitoringMvcWebApp" userName="$MonitoringMvcWebApp" userPWD="yysu0DwgWXac0sAlk4iqD6X8hE4gmuKdzjSLfLnvSjjAN74zpKAxbfwAX901" destinationAppUrl="http://monitoringmvcwebapp.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="MonitoringMvcWebApp - FTP" publishMethod="FTP" publishUrl="ftp://waws-prod-blu-263.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="MonitoringMvcWebApp\$MonitoringMvcWebApp" userPWD="yysu0DwgWXac0sAlk4iqD6X8hE4gmuKdzjSLfLnvSjjAN74zpKAxbfwAX901" destinationAppUrl="http://monitoringmvcwebapp.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="MonitoringMvcWebApp - Zip Deploy" publishMethod="ZipDeploy" publishUrl="monitoringmvcwebapp.scm.azurewebsites.net:443" userName="$MonitoringMvcWebApp" userPWD="yysu0DwgWXac0sAlk4iqD6X8hE4gmuKdzjSLfLnvSjjAN74zpKAxbfwAX901" destinationAppUrl="http://monitoringmvcwebapp.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>'
-
+  # TODO: Replace publish-profile values with ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} and configure as a GitHub secret
+  
 on:
   push:
     branches: [master, dev]
@@ -24,16 +25,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       
-      - name: Set up dependency caching for faster builds
-        uses: actions/cache@v2
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
+      - name: Restore dependencies
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release
+        run: dotnet build --no-restore --configuration Release
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
@@ -47,12 +43,12 @@ jobs:
           name: .net-app
           path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
 
-  deploy:
+  deploy-web-api:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp-api.outputs.webapp-url }}
+      name: 'Monitoring Web API'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -61,17 +57,30 @@ jobs:
           name: .net-app
 
       - name: Deploy to Azure Web App API
-        id: deploy-to-webapp-api
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ env.API_AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.API_PUBLISH_PROFILE }}   #TODO: change to GitHub secret
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
+  deploy-mvc:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Monitoring MVC'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+      
       - name: Deploy to Azure Web App MVC
-        id: deploy-to-webapp-mvc
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ env.MVC_AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.MVC_PUBLISH_PROFILE }}   #TODO: change to GitHub secret
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
