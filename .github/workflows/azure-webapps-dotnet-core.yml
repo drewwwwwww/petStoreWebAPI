@@ -62,7 +62,7 @@ jobs:
         with:
           app-name: ${{ env.API_AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.API_PUBLISH_PROFILE }}   #TODO: change to GitHub secret
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/petStoreWebAPI
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy-mvc:
     runs-on: ubuntu-latest
@@ -83,4 +83,4 @@ jobs:
         with:
           app-name: ${{ env.MVC_AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.MVC_PUBLISH_PROFILE }}   #TODO: change to GitHub secret
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/petStoreMonitoringApp
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
