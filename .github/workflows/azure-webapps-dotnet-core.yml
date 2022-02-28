@@ -31,8 +31,14 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release
 
+      - name: Temporary log for troubleshooting
+        run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp
+
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
+        
+      - name: Temp log
+        run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/myapp/; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
