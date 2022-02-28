@@ -63,7 +63,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: .net-app
+          name: .net-app-webapi
           
       - name: Temporary log for troubleshooting
         run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI
@@ -87,7 +87,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: .net-app
+          name: .net-app-mvc
           
       - name: Temporary log for troubleshooting
         run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp
