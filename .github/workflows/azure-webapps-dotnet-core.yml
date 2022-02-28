@@ -38,7 +38,7 @@ jobs:
         run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp
         
       - name: Temp log
-        run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/myapp/; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI
+        run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/mvc/; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
