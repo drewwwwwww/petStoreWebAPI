@@ -28,14 +28,14 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
+      - name: Build and Publish Web API
+        run: dotnet build petStoreWebAPI/petStoreWebAPI.csproj --no-restore --configuration Release; dotnet publish petStoreWebAPI/petStoreWebAPI.csproj -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/webapi
+
+      - name: Build and Publish MVC
+        run: dotnet build petStoreMonitoringApp/petStoreMonitoringApp.csproj --no-restore --configuration Release; dotnet publish petStoreMonitoringApp/petStoreMonitoringApp.csproj -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/mvc
 
       - name: Temporary log for troubleshooting
         run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp
-
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
         
       - name: Temp log
         run: ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/myapp/; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreMonitoringApp; ls -l /home/runner/work/petStoreWebAPI/petStoreWebAPI/petStoreWebAPI
@@ -43,8 +43,14 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: .net-app
-          path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+          name: .net-app-webapi
+          path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/webapi
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app-mvc
+          path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/mvc
 
   deploy-web-api:
     runs-on: ubuntu-latest
@@ -68,7 +74,7 @@ jobs:
         with:
           app-name: ${{ env.API_AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.API_PUBLISH_PROFILE }}   #TODO: change to GitHub secret
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/webapi
 
   deploy-mvc:
     runs-on: ubuntu-latest
@@ -92,4 +98,4 @@ jobs:
         with:
           app-name: ${{ env.MVC_AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.MVC_PUBLISH_PROFILE }}   #TODO: change to GitHub secret
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/mvc
