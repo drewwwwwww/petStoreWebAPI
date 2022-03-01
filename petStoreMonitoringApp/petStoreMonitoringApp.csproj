@@ -12,6 +12,7 @@
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Views\Home\ProjectInfo\" />
+    <None Remove="Chart.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

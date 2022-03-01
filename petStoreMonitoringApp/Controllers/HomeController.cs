@@ -28,25 +28,25 @@ namespace petStoreMonitoringApp.Controllers
             return View();
         }
 
-        public new IActionResult User()
+        public IActionResult User()
         {
             return View();
         }
 
-        public new IActionResult MetricSelect()
+        public IActionResult MetricSelect()
         {
             return View();
         }
 
         //[HttpGet("/Views/Home/ProjectInfo/Business")]
-        public new IActionResult Business()
+        public IActionResult Business()
         {
             //return View("/Views/Home/ProjectInfo/Business"); //I wanted to get it into a subfolder but couldn't
             return View();
         }
 
         //[HttpGet("/Views/Home/ProjectInfo/Performance")]
-        public new IActionResult Performance()
+        public IActionResult Performance()
         {
             //return View("/Views/Home/ProjectInfo/Performance"); //I wanted to get it into a subfolder but couldn't
             return View();
