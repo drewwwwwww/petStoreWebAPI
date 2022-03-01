@@ -33,6 +33,25 @@ namespace petStoreMonitoringApp.Controllers
             return View();
         }
 
+        public new IActionResult MetricSelect()
+        {
+            return View();
+        }
+
+        //[HttpGet("/Views/Home/ProjectInfo/Business")]
+        public new IActionResult Business()
+        {
+            //return View("/Views/Home/ProjectInfo/Business"); //I wanted to get it into a subfolder but couldn't
+            return View();
+        }
+
+        //[HttpGet("/Views/Home/ProjectInfo/Performance")]
+        public new IActionResult Performance()
+        {
+            //return View("/Views/Home/ProjectInfo/Performance"); //I wanted to get it into a subfolder but couldn't
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
