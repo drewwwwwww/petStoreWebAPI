@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using petStoreMonitoringApp.Models;
 
 namespace petStoreMonitoringApp
 {
@@ -24,9 +26,16 @@ namespace petStoreMonitoringApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             services.AddDbContext<petStoreMonitoringAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("petStoreMonitoringAppContext")));
+
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddUserManager<UserManager<IdentityUser>>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<petStoreMonitoringAppContext>();
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +56,7 @@ namespace petStoreMonitoringApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -54,6 +64,7 @@ namespace petStoreMonitoringApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
