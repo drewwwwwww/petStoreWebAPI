@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using petStoreMonitoringApp.Models;
+using petStoreMonitoringApp.Services;
 
 namespace petStoreMonitoringApp
 {
@@ -34,7 +35,7 @@ namespace petStoreMonitoringApp
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<petStoreMonitoringAppContext>();
-
+            services.AddScoped<Initializer>();
             services.AddControllersWithViews();
         }
 
