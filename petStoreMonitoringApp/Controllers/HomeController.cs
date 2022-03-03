@@ -28,6 +28,21 @@ namespace petStoreMonitoringApp.Controllers
             return View();
         }
 
+        public IActionResult MaintainUsers()
+        {
+            return View();
+        }
+
+        public IActionResult MaintainMetrics()
+        {
+            return View();
+        }
+
+        public IActionResult MaintainProjects()
+        {
+            return View();
+        }
+
         public IActionResult User()
         {
             return View();
