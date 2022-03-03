@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Business Metrics";
+}
+<h1>@ViewData["Title"]</h1>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <h4 class="text-center">Quantity on hand for merchandise items</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Quantity on Hand</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Dog Food</th>
+                <td>001</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <th scope="row">Cat Litter</th>
+                <td>002</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <th scope="row">Collars</th>
+                <td>003</td>
+                <td>50</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h4 class="text-center">Quantity on hand for merchandise items - Chart</h4>
+    <br />
+    <br />
+    <h4 class="text-center">Number of each category of animal purchased</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Quantity on Hand</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Dog</th>
+                <td>001</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <th scope="row">Cat</th>
+                <td>002</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <th scope="row">Birds</th>
+                <td>003</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h4 class="text-center">Number of each category of animal purchased - Chart</h4>
+    <br />
+    <br />
+    <h4 class="text-center">State where orders are placed from</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">State</th>
+                <th scope="col">State ID</th>
+                <th scope="col">Number of orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Tennessee</th>
+                <td>001</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <th scope="row">New York</th>
+                <td>002</td>
+                <td>57</td>
+            </tr>
+            <tr>
+                <th scope="row">Florida</th>
+                <td>003</td>
+                <td>16</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h4 class="text-center">State where orders are placed from - Chart</h4>
+</body>
