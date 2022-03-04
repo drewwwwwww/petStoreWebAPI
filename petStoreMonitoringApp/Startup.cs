@@ -30,8 +30,8 @@ namespace petStoreMonitoringApp
             services.AddDbContext<petStoreMonitoringAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("petStoreMonitoringAppContext")));
 
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //RequireConfirmedAccount set to true if you want a confirmed account
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<petStoreMonitoringAppContext>();

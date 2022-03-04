@@ -38,11 +38,11 @@ namespace petStoreMonitoringApp.Services
             }
 
             //Creates admin if there is not one
-            if(!_db.Users.Any(user => user.UserName == "Admin"))
+            if(!_db.Users.Any(user => user.UserName == "admin@admin.com"))
             {
                 var user = new IdentityUser
                 {
-                    UserName = "Admin",
+                    UserName = "admin@admin.com",
                     Email = "admin@admin.com"
                 };
                 await _userManager.CreateAsync(user, "Admin1!");
