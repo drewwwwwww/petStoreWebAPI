@@ -1,0 +1,69 @@
+name: Build and deploy .NET solution to Web API and MVC Azure App Services
+
+env:
+  API_AZURE_WEBAPP_NAME: 'SE2MonitoringWebAPI'
+  MVC_AZURE_WEBAPP_NAME: 'MonitoringMvcWebApp'
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  DOTNET_VERSION: '6.0.x'
+
+on:
+  push:
+    branches: master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy-web-api:
+    runs-on: ubuntu-latest
+    environment:
+      name: 'Monitoring Web API'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build
+        run: dotnet build petStoreWebAPI/petStoreWebAPI.csproj --configuration Release
+
+      - name: Publish
+        run: dotnet publish petStoreWebAPI/petStoreWebAPI.csproj -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
+
+      - name: Deploy API to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.API_AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0762CF78E9394EC086BFF4F95321228A }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp
+          
+  build-and-deploy-mvc:
+    runs-on: ubuntu-latest
+    environment:
+      name: 'Monitoring MVC'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build
+        run: dotnet build petStoreMonitoringApp/petStoreMonitoringApp.csproj --configuration Release
+
+      - name: Publish
+        run: dotnet publish petStoreMonitoringApp/petStoreMonitoringApp.csproj -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
+
+      - name: Deploy API to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.MVC_AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_23498576234578963245897 }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp
