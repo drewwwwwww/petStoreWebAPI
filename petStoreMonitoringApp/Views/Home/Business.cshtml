@@ -37,38 +37,27 @@
     </table>
     <br />
     <h4 class="text-center">Quantity on hand for merchandise items - Chart</h4>
-    <div id="chart_div"></div>
+    <div id="chart_div1"></div>
 
     <script>google.charts.load('current', { packages: ['corechart', 'bar'] });
         google.charts.setOnLoadCallback(drawMaterial);
 
         function drawMaterial() {
             var data = new google.visualization.DataTable();
-            data.addColumn('timeofday', 'Name of Item');
-            data.addColumn('number', 'Quantity');
+            data.addColumn('string', 'Name of Item');
+            data.addColumn('number', 'Quantity Available');
 
             data.addRows([
-                [{ v: [8, 0, 0], f: '8 am' }, 41],
-                [{ v: [9, 0, 0], f: '9 am' }, 27],
-                [{ v: [10, 0, 0], f: '10 am' }, 50],
+                ['Dog Food', 41],
+                ['Cat Litter', 27],
+                ['Collars', 50],
             ]);
 
             var options = {
                 title: 'Quantity on hand for merchandise items',
-                hAxis: {
-                    title: 'Name of Item',
-                    format: 'h:mm a',
-                    viewWindow: {
-                        min: [7, 30, 0],
-                        max: [17, 30, 0]
-                    }
-                },
-                vAxis: {
-                    title: 'Rating (scale of 1-50)'
-                }
             };
 
-            var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+            var materialChart = new google.charts.Bar(document.getElementById('chart_div1'));
             materialChart.draw(data, options);
         }</script>
     <br />
@@ -84,12 +73,12 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">Dog</th>
+                <th scope="row">Dogs</th>
                 <td>001</td>
                 <td>4</td>
             </tr>
             <tr>
-                <th scope="row">Cat</th>
+                <th scope="row">Cats</th>
                 <td>002</td>
                 <td>3</td>
             </tr>
@@ -102,38 +91,27 @@
     </table>
     <br />
     <h4 class="text-center">Number of each category of animal purchased - Chart</h4>
-    <div id="chart_div"></div>
+    <div id="chart_div2"></div>
 
     <script>google.charts.load('current', { packages: ['corechart', 'bar'] });
         google.charts.setOnLoadCallback(drawMaterial);
 
         function drawMaterial() {
             var data = new google.visualization.DataTable();
-            data.addColumn('timeofday', 'Name of Item');
-            data.addColumn('number', 'Quantity');
+            data.addColumn('string', 'Animal Category');
+            data.addColumn('number', 'Animals Purchased');
 
             data.addRows([
-                [{ v: [8, 0, 0], f: '8 am' }, 41],
-                [{ v: [9, 0, 0], f: '9 am' }, 27],
-                [{ v: [10, 0, 0], f: '10 am' }, 50],
+                ['Dogs', 4],
+                ['Cats', 3],
+                ['Birds', 10],
             ]);
 
             var options = {
-                title: 'Quantity on hand for merchandise items',
-                hAxis: {
-                    title: 'Name of Item',
-                    format: 'h:mm a',
-                    viewWindow: {
-                        min: [7, 30, 0],
-                        max: [17, 30, 0]
-                    }
-                },
-                vAxis: {
-                    title: 'Rating (scale of 1-50)'
-                }
+                title: 'Number of each category of animal purchased',
             };
 
-            var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+            var materialChart = new google.charts.Bar(document.getElementById('chart_div2'));
             materialChart.draw(data, options);
         }</script>
     <br />
@@ -167,38 +145,27 @@
     </table>
     <br />
     <h4 class="text-center">State where orders are placed from - Chart</h4>
-    <div id="chart_div"></div>
+    <div id="chart_div3"></div>
 
     <script>google.charts.load('current', { packages: ['corechart', 'bar'] });
         google.charts.setOnLoadCallback(drawMaterial);
 
         function drawMaterial() {
             var data = new google.visualization.DataTable();
-            data.addColumn('timeofday', 'Name of Item');
-            data.addColumn('number', 'Quantity');
+            data.addColumn('string', 'State');
+            data.addColumn('number', 'Number of Orders Placed');
 
             data.addRows([
-                [{ v: [8, 0, 0], f: '8 am' }, 41],
-                [{ v: [9, 0, 0], f: '9 am' }, 27],
-                [{ v: [10, 0, 0], f: '10 am' }, 50],
+                ['Tennessee', 22],
+                ['New York', 57],
+                ['Florida', 16],
             ]);
 
             var options = {
-                title: 'Quantity on hand for merchandise items',
-                hAxis: {
-                    title: 'Name of Item',
-                    format: 'h:mm a',
-                    viewWindow: {
-                        min: [7, 30, 0],
-                        max: [17, 30, 0]
-                    }
-                },
-                vAxis: {
-                    title: 'Rating (scale of 1-50)'
-                }
+                title: 'States where orders are placed from'
             };
 
-            var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+            var materialChart = new google.charts.Bar(document.getElementById('chart_div3'));
             materialChart.draw(data, options);
         }</script>
 </body>
