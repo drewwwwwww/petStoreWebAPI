@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using petStoreMonitoringApp.Models;
+using petStoreMonitoringApp.Models.ViewModels;
 using System.Diagnostics;
 
 namespace petStoreMonitoringApp.Controllers
@@ -7,10 +9,12 @@ namespace petStoreMonitoringApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -30,7 +34,8 @@ namespace petStoreMonitoringApp.Controllers
 
         public IActionResult MaintainUsers()
         {
-            return View();
+            var users = _userManager.Users;
+            return View(users);
         }
 
         public IActionResult MaintainMetrics()

@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Maintain Users Accounts";
+﻿@model IEnumerable<IdentityUser>
+
+@{
+    ViewBag.Title = "Maintain Users Accounts";
 }
 
 <!DOCTYPE html>
@@ -28,30 +30,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">Boss</th>
-                    <td>BossMan&#64email.com</td>
-                    <td>Admin</td>
-                    <td><a href=# class="btn btn-primary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Update</a></td>
-                    <td><a href=# class="btn btn-secondary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Delete</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">Drake</th>
-                    <td>Rapper&#64email.com</td>
-                    <td>User</td>
-                    <td><a href=# class="btn btn-primary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Update</a></td>
-                    <td><a href=# class="btn btn-secondary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Delete</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">John</th>
-                    <td>Norm&#64email.com</td>
-                    <td>User</td>
-                    <td><a href=# class="btn btn-primary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Update</a></td>
-                    <td><a href=# class="btn btn-secondary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Delete</a></td>
-                </tr>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelUser => user.UserName)</td>
+                        <td>@Html.DisplayFor(modelUser => user.Email)</td>     
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </body>
 </html>
-
