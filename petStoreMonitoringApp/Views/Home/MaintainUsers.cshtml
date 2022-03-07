@@ -37,10 +37,10 @@
                         <td>@Html.DisplayFor(modelUser => user.Email)</td>
                         <td>@string.Join(" , ", user.Roles.ToList())</td>
                         <td>
-                            <a class="btn btn-primary" asp-controller="Home" asp-action="ManageUserRole" asp-route-email="@user.Email">Manage Roles</a>
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="ManageUserRoles" asp-route-userId="@user.UserId">Manage Roles</a>
                         </td>
                         <td>
-                            <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteUser" asp-route-email="@user.Email">Delete</a>
+                            <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteUser" asp-route-userId="@user.UserId">Delete</a>
                         </td>
                     </tr>
                 }
