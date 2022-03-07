@@ -117,6 +117,33 @@ namespace petStoreMonitoringApp.Controllers
         }
         #endregion
 
+        #region DeleteUserPost
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("MaintainUsers");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View("MaintainUsers");
+            }
+        }
+        #endregion
+
         public IActionResult MaintainMetrics()
         {
             return View();
