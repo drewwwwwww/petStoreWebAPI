@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using petStoreMonitoringApp.Models;
 using petStoreMonitoringApp.Models.ViewModels;
 using System.Diagnostics;
@@ -10,11 +11,13 @@ namespace petStoreMonitoringApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _logger = logger;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -32,11 +35,27 @@ namespace petStoreMonitoringApp.Controllers
             return View();
         }
 
-        public IActionResult MaintainUsers()
+        public async Task<IActionResult> MaintainUsers()
         {
-            var users = _userManager.Users;
-            return View(users);
+            var users = await _userManager.Users.ToListAsync();
+            var maintainUserVM = new List<MaintainUsersVM>();
+            foreach (var user in users)
+            {
+                var tempViewModel = new MaintainUsersVM();
+                tempViewModel.UserName = user.UserName;
+                tempViewModel.Email = user.Email;
+                tempViewModel.Roles = await GetUserRoles(user);
+                maintainUserVM.Add(tempViewModel);
+            }
+            return View(maintainUserVM);
         }
+
+        #region GetUserRoles
+        private async Task<List<string>> GetUserRoles(IdentityUser user)
+        {
+            return new List<string>(await _userManager.GetRolesAsync(user));
+        }
+        #endregion
 
         public IActionResult MaintainMetrics()
         {

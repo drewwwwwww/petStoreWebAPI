@@ -4,7 +4,9 @@ namespace petStoreMonitoringApp.Models.ViewModels
 {
     public class MaintainUsersVM
     {
-        public IList<IdentityUser> AdminUsers { get; set; }
-        public IList<IdentityUser> Users { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public IEnumerable<string> Roles { get; set; }
+        
     }
 }

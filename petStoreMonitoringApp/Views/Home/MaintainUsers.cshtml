@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IdentityUser>
+﻿@model List<petStoreMonitoringApp.Models.ViewModels.MaintainUsersVM>;
 
 @{
     ViewBag.Title = "Maintain Users Accounts";
@@ -25,7 +25,7 @@
                     <th scope="col">User Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Update</th>
+                    <th scope="col">Manage</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -34,7 +34,14 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelUser => user.UserName)</td>
-                        <td>@Html.DisplayFor(modelUser => user.Email)</td>     
+                        <td>@Html.DisplayFor(modelUser => user.Email)</td>
+                        <td>@string.Join(" , ", user.Roles.ToList())</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="ManageUserRole" asp-route-email="@user.Email">Manage Roles</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteUser" asp-route-email="@user.Email">Delete</a>
+                        </td>
                     </tr>
                 }
             </tbody>
