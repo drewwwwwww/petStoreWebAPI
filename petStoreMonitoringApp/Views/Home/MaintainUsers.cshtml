@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Maintain Users Accounts";
+﻿@model List<petStoreMonitoringApp.Models.ViewModels.MaintainUsersVM>;
+
+@{
+    ViewBag.Title = "Maintain Users Accounts";
 }
 
 <!DOCTYPE html>
@@ -23,35 +25,29 @@
                     <th scope="col">User Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Update</th>
+                    <th scope="col">Manage</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">Boss</th>
-                    <td>BossMan&#64email.com</td>
-                    <td>Admin</td>
-                    <td><a href=# class="btn btn-primary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Update</a></td>
-                    <td><a href=# class="btn btn-secondary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Delete</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">Drake</th>
-                    <td>Rapper&#64email.com</td>
-                    <td>User</td>
-                    <td><a href=# class="btn btn-primary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Update</a></td>
-                    <td><a href=# class="btn btn-secondary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Delete</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">John</th>
-                    <td>Norm&#64email.com</td>
-                    <td>User</td>
-                    <td><a href=# class="btn btn-primary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Update</a></td>
-                    <td><a href=# class="btn btn-secondary btn-lg active btn-lg btn-block" role="button" aria-pressed="true">Delete</a></td>
-                </tr>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelUser => user.UserName)</td>
+                        <td>@Html.DisplayFor(modelUser => user.Email)</td>
+                        <td>@string.Join(" , ", user.Roles.ToList())</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="ManageUserRoles" asp-route-userId="@user.UserId">Manage Roles</a>
+                        </td>
+                        <td>
+                            <form method="post" asp-action="DeleteUser" asp-route-id="@user.UserId">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </body>
 </html>
-
