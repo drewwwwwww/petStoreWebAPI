@@ -37,7 +37,7 @@
                         <td>@Html.DisplayFor(modelUser => user.Email)</td>
                         <td>@string.Join(" , ", user.Roles.ToList())</td>
                         <td>
-                            <a class="btn btn-primary" asp-controller="Home" asp-action="ManageUserRoles" asp-route-userId="@user.UserId">Manage Roles</a>
+                            <a class="btn btn-primary" asp-controller="Admin" asp-action="ManageUserRoles" asp-route-userId="@user.UserId">Manage Roles</a>
                         </td>
                         <td>
                             <form method="post" asp-action="DeleteUser" asp-route-id="@user.UserId">
