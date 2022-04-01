@@ -1,4 +1,8 @@
-﻿@{
+﻿@using petStoreMonitoringApp.Models
+
+@model petStoreMonitoringApp.Models.ViewModels.BusinessMetricsVM
+
+@{
     ViewData["Title"] = "Business Metrics";
 }
 <h1>@ViewData["Title"]</h1>
@@ -12,27 +16,26 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Item Name</th>
+                <th scope="col">OnHandMerchId</th>
                 <th scope="col">Item ID</th>
+                <th scope="col">Item Name</th>
                 <th scope="col">Quantity on Hand</th>
+                <th scope="col">Date</th>
+                <th scope="col">Timestamp</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">Dog Food</th>
-                <td>001</td>
-                <td>41</td>
-            </tr>
-            <tr>
-                <th scope="row">Cat Litter</th>
-                <td>002</td>
-                <td>27</td>
-            </tr>
-            <tr>
-                <th scope="row">Collars</th>
-                <td>003</td>
-                <td>50</td>
-            </tr>
+            @foreach (OnHandMerch item in Model.OnHandMerchList)
+            {
+                <tr>
+                    <th scope="row">@item.OnHandMerchId</th>
+                    <td>@item.ItemId</td>
+                    <td>[No Item Name]</td>
+                    <td>@item.QuantityonHand</td>
+                    <td>@item.Date</td>
+                    <td>@item.TimeStamp</td>
+                </tr>
+            }
         </tbody>
     </table>
     <br />
@@ -66,27 +69,22 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col">Animal Category ID</th>
                 <th scope="col">Animal Category</th>
-                <th scope="col">Item ID</th>
-                <th scope="col">Animals Purchased</th>
+                <th scope="col">Date</th>
+                <th scope="col">Timestamp</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">Dogs</th>
-                <td>001</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <th scope="row">Cats</th>
-                <td>002</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <th scope="row">Birds</th>
-                <td>003</td>
-                <td>10</td>
-            </tr>
+            @foreach (AnimalPurchaseCategory item in Model.AnimalPurchaseCategoryList)
+            {
+                <tr>
+                    <th scope="row">@item.AnimalPurchaseCategoryId</th>
+                    <td>@item.Category</td>
+                    <td>@item.Date</td>
+                    <td>@item.TimeStamp</td>
+                </tr>
+            }
         </tbody>
     </table>
     <br />
@@ -120,27 +118,22 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col">Order State ID</th>
                 <th scope="col">State</th>
-                <th scope="col">State ID</th>
-                <th scope="col">Number of Orders</th>
+                <th scope="col">Date</th>
+                <th scope="col">Timestamp</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">Tennessee</th>
-                <td>001</td>
-                <td>22</td>
-            </tr>
-            <tr>
-                <th scope="row">New York</th>
-                <td>002</td>
-                <td>57</td>
-            </tr>
-            <tr>
-                <th scope="row">Florida</th>
-                <td>003</td>
-                <td>16</td>
-            </tr>
+            @foreach (OrderState item in Model.OrderStateList)
+            {
+                <tr>
+                    <th scope="row">@item.OrderStateId</th>
+                    <td>@item.State</td>
+                    <td>@item.Date</td>
+                    <td>@item.TimeStamp</td>
+                </tr>
+            }
         </tbody>
     </table>
     <br />
