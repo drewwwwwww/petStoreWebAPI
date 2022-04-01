@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace petStoreMonitoringApp.Controllers
 {
+    [Authorize(Roles = "Admin, User")]
     public class UserController : Controller
     {
         public IActionResult Index()
