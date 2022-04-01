@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
 using System.Text.Json;
 
 using petStoreMonitoringApp.Models.ViewModels;
@@ -55,9 +54,14 @@ namespace petStoreMonitoringApp.Controllers
         }
 
         //[HttpGet("/Views/Home/ProjectInfo/Performance")]
-        public IActionResult Performance()
+        public async Task<IActionResult> Performance()
         {
-            return View();
+            HttpResponseMessage response = await client.GetAsync("/api/Sessions");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var sessions = JsonSerializer.Deserialize<List<Session>>(responseBody, options);
+
+            return View(sessions);
         }
     }
 }
