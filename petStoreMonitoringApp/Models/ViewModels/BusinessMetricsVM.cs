@@ -5,5 +5,6 @@
         public List<OnHandMerch> OnHandMerchList { get; set; }
         public List<AnimalPurchaseCategory> AnimalPurchaseCategoryList { get; set; }
         public List<OrderState> OrderStateList { get; set; }
+        public List<OnHandMerch> MostRecentOnHandMerch { get; set; }
     }
 }

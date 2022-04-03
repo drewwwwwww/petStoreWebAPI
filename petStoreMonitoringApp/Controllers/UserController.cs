@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 using petStoreMonitoringApp.Models.ViewModels;
 using petStoreMonitoringApp.Models;
-using Microsoft.AspNetCore.Authorization;
+using petStoreMonitoringApp.Services;
 
 namespace petStoreMonitoringApp.Controllers
 {
@@ -34,23 +35,8 @@ namespace petStoreMonitoringApp.Controllers
         //[HttpGet("/Views/Home/ProjectInfo/Business")]
         public async Task<IActionResult> Business()
         {
-            var businessMetricsVM = new BusinessMetricsVM();
-
-            HttpResponseMessage response = await client.GetAsync("/api/OnHandMerch");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            businessMetricsVM.OnHandMerchList = JsonSerializer.Deserialize<List<OnHandMerch>>(responseBody, options);
-
-            response = await client.GetAsync("/api/AnimalPurchaseCategories");
-            response.EnsureSuccessStatusCode();
-            responseBody = await response.Content.ReadAsStringAsync();
-            businessMetricsVM.AnimalPurchaseCategoryList
-                = JsonSerializer.Deserialize<List<AnimalPurchaseCategory>>(responseBody, options);
-
-            response = await client.GetAsync("/api/OrderStates");
-            response.EnsureSuccessStatusCode();
-            responseBody = await response.Content.ReadAsStringAsync();
-            businessMetricsVM.OrderStateList = JsonSerializer.Deserialize<List<OrderState>>(responseBody, options);
+            var businessMetricsVM = await BusinessDataAggregator.GetDataFromAPI();
+            businessMetricsVM = BusinessDataAggregator.AggregateData(businessMetricsVM);
 
             return View(businessMetricsVM);
         }
