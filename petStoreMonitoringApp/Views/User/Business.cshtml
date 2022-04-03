@@ -98,14 +98,15 @@
 
         function drawMaterial() {
             var data = new google.visualization.DataTable();
+            var view_model = @Html.Raw(Json.Serialize(Model.TotalAnimalsInCategoryPurchased));
             data.addColumn('string', 'Animal Category');
             data.addColumn('number', 'Animals Purchased');
 
-            data.addRows([
-                ['Dogs', 4],
-                ['Cats', 3],
-                ['Birds', 10],
-            ]);
+            for (const [key, value] of Object.entries(view_model)) {
+                data.addRows([
+                    [key, value],
+                ]);
+            }
 
             var options = {
                 title: 'Number of each category of animal purchased',
@@ -147,14 +148,15 @@
 
         function drawMaterial() {
             var data = new google.visualization.DataTable();
+            var view_model = @Html.Raw(Json.Serialize(Model.TotalOrdersInState));
             data.addColumn('string', 'State');
             data.addColumn('number', 'Number of Orders Placed');
 
-            data.addRows([
-                ['Tennessee', 22],
-                ['New York', 57],
-                ['Florida', 16],
-            ]);
+            for (const [key, value] of Object.entries(view_model)) {
+                data.addRows([
+                    [key, value],
+                ]);
+            }
 
             var options = {
                 title: 'States where orders are placed from'

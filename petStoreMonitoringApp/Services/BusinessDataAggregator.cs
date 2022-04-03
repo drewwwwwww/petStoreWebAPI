@@ -46,14 +46,17 @@ namespace petStoreMonitoringApp.Services
             businessMetricsVM.MostRecentOnHandMerch = (
                 from onHandMerch in businessMetricsVM.OnHandMerchList
                 group onHandMerch by onHandMerch.ItemId into onHandMerchByItem
+                orderby onHandMerchByItem.Key
                 select onHandMerchByItem.MaxBy(x => x.TimeStamp)).ToList();
 
             businessMetricsVM.TotalAnimalsInCategoryPurchased = businessMetricsVM.AnimalPurchaseCategoryList
                 .GroupBy(x => x.Category)
+                .OrderBy(x => x.Key)
                 .ToDictionary(k => k.Key, v => v.Count());
 
             businessMetricsVM.TotalOrdersInState = businessMetricsVM.OrderStateList
                 .GroupBy(x => x.State)
+                .OrderBy(x => x.Key)
                 .ToDictionary(k => k.Key, v => v.Count());
 
             return businessMetricsVM;
