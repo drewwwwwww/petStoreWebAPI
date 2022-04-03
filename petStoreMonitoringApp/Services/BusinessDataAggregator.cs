@@ -43,7 +43,7 @@ namespace petStoreMonitoringApp.Services
 
         public static BusinessMetricsVM AggregateData(BusinessMetricsVM businessMetricsVM)
         {
-            var mostRecentOnHandMerch = (
+            businessMetricsVM.MostRecentOnHandMerch = (
                 from onHandMerch in businessMetricsVM.OnHandMerchList
                 group onHandMerch by onHandMerch.ItemId into onHandMerchByItem
                 select onHandMerchByItem.MaxBy(x => x.TimeStamp)).ToList();
