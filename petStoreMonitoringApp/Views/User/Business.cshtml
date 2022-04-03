@@ -47,14 +47,16 @@
 
         function drawMaterial() {
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Name of Item');
+            var view_model = @Html.Raw(Json.Serialize(Model.MostRecentOnHandMerch));
+            data.addColumn('string', 'Item ID');
             data.addColumn('number', 'Quantity Available');
 
-            data.addRows([
-                ['Dog Food', 41],
-                ['Cat Litter', 27],
-                ['Collars', 50],
-            ]);
+            for (let i = 0; i < view_model.length; i++) {
+                data.addRows([
+                    [view_model[i].itemId.toString(), view_model[i].quantityonHand],
+                ]);
+            }
+
 
             var options = {
                 title: 'Quantity on hand for merchandise items',
