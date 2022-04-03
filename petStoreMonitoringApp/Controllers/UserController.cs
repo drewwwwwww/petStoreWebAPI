@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 using petStoreMonitoringApp.Models.ViewModels;
 using petStoreMonitoringApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace petStoreMonitoringApp.Controllers
 {
+    [Authorize(Roles = "Admin, User")]
     public class UserController : Controller
     {
         private const string BASE_ADDRESS = "https://se2monitoringwebapi.azurewebsites.net";
