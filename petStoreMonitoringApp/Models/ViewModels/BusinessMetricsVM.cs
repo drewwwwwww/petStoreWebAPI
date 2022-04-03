@@ -9,5 +9,7 @@
 
         //aggregated data
         public List<OnHandMerch> MostRecentOnHandMerch { get; set; }
+        public Dictionary<string, int> TotalAnimalsInCategoryPurchased { get; set; }
+        public Dictionary<string, int> TotalOrdersInState { get; set; }
     }
 }
