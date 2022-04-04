@@ -1,0 +1,32 @@
+﻿@model List<petStoreMonitoringApp.Models.Session>
+
+@{
+    ViewData["Title"] = "Performance Metrics";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Session ID</th>
+            <th scope="col">Page ID</th>
+            <th scope="col">Request Timestamp</th>
+            <th scope="col">Start Timestamp</th>
+            <th scope="col">End Timestamp</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var session in Model)
+        {
+            <tr>
+                <th scope="row">@session.SessionId</th>
+                <td>@session.PageID</td>
+                <td>@session.Request_TimeStamp</td>
+                <td>@session.Start_TimeStamp</td>
+                <td>@session.End_TimeStamp</td>
+                <td>@session.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>
