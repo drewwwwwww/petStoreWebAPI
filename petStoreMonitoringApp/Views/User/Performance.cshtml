@@ -1,4 +1,4 @@
-﻿@model List<petStoreMonitoringApp.Models.Session>
+﻿@model petStoreMonitoringApp.Models.ViewModels.PerformanceMetricsVM
 
 @{
     ViewData["Title"] = "Performance Metrics";
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var session in Model)
+        @foreach (var session in Model.SessionsList)
         {
             <tr>
                 <th scope="row">@session.SessionId</th>
