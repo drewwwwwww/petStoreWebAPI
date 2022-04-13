@@ -31,6 +31,18 @@ namespace petStoreMonitoringApp.Services
 
         public static PerformanceMetricsVM AggregateData(PerformanceMetricsVM performanceMetricsVM)
         {
+            performanceMetricsVM.AverageResponseTimes = performanceMetricsVM.SessionsList
+                .GroupBy(x => x.PageID)
+                .ToDictionary(k => k.Key, v => v.Average(x => (x.Start_TimeStamp - x.Request_TimeStamp).TotalSeconds));
+
+            performanceMetricsVM.AverageSessionLengths = performanceMetricsVM.SessionsList
+                .GroupBy(x => x.PageID)
+                .ToDictionary(k => k.Key, v => v.Average(x => (x.End_TimeStamp - x.Start_TimeStamp).TotalSeconds));
+
+            performanceMetricsVM.TotalNumbersOfSessions = performanceMetricsVM.SessionsList
+                .GroupBy(x => x.PageID)
+                .ToDictionary(k => k.Key, v => v.Count());
+
             return performanceMetricsVM;
         }
     }

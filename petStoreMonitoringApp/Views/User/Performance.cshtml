@@ -5,6 +5,31 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+<br />
+<h2>Aggregated Sessions Data</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Page ID</th>
+            <th scope="col">Average Response Time</th>
+            <th scope="col">Average Session Length</th>
+            <th scope="col">Total Number of Sessions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (int pageId in Model.AverageSessionLengths.Keys)
+        {
+            <tr>
+                <th scope="row">@pageId</th>
+                <td>@Model.AverageResponseTimes[pageId] s</td>
+                <td>@Model.AverageSessionLengths[pageId] s</td>
+                <td>@Model.TotalNumbersOfSessions[pageId]</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Raw Sessions Data</h2>
 <table class="table table-striped">
     <thead>
         <tr>
