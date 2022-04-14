@@ -44,12 +44,10 @@ namespace petStoreMonitoringApp.Controllers
         //[HttpGet("/Views/Home/ProjectInfo/Performance")]
         public async Task<IActionResult> Performance()
         {
-            HttpResponseMessage response = await client.GetAsync("/api/Sessions");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var sessions = JsonSerializer.Deserialize<List<Session>>(responseBody, options);
+            var performanceMetricsVM = await PerformanceDataAggregator.GetDataFromAPI();
+            performanceMetricsVM = PerformanceDataAggregator.AggregateData(performanceMetricsVM);
 
-            return View(sessions);
+            return View(performanceMetricsVM);
         }
     }
 }
