@@ -1,7 +1,124 @@
 ﻿@{
     ViewData["Title"] = "MaintainMetrics";
 }
-<h1>Maintain Metric Categories</h1>
+<h1>Maintain Metrics</h1>
 
-<p>Use this page to maintain metric categories.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <form>
+        <div class="form-group">
+            <br />
+            <label for="formGroupExampleInput">Project</label>
+            <br />
+            <select name="Project">
+                <option>Pet Store Project</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary">Add Metric</button>
+    </form>
 
+    <div class="text-center">
+        <h1 class="display-4">Business Related Metrics</h1>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Metric Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Manage</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Quantity on hand for merchandise items</td>
+                    <td>Displays the quantity of different merchandise in stock.</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Manage Metric</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number of each category of animal purchased</td>
+                    <td>Displays the quantity of animals in purchased by category.</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Manage Metric</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>State where orders are placed from</td>
+                    <td>Displays the state where different orders are placed from.</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Manage Metric</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <h1 class="display-4">Application Performance Metrics</h1>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Metric Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Manage</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Average Response Time</td>
+                    <td>The average time it takes to respond to a request on a specific page aggregated from sessions data.</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Manage Metric</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Average Session Length</td>
+                    <td>The average duration of a session on a specific page aggregated from sessions data.</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Manage Metric</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total number of sessions</td>
+                    <td>The total number of sessions on a specific page aggregated from sessions data.</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Manage Metric</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
