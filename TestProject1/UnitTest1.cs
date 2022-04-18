@@ -20,7 +20,7 @@ namespace TestProject1
         {
             Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
 
-            Assert.IsTrue(Driver.FindElement(By.ClassName("registerPage")).Displayed);
+            Assert.IsTrue(Driver.FindElement(By.Id("registerPage")).Displayed);
         }
     }
 }
