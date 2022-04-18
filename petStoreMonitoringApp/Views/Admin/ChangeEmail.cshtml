@@ -1,0 +1,22 @@
+﻿@model petStoreMonitoringApp.Models.ViewModels.MaintainEmailVM;
+<h2>Edit User</h2>
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Manage User Email</h2>
+        </div>
+        <div class="card-body">
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" cclass="text-danger"></span>
+            </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="MaintainUsers" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>
