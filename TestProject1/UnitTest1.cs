@@ -83,12 +83,6 @@ namespace TestProject1
 
             maintainUsersButton?.Click();
 
-            //get correct button for the test user
-
-            //WebElement simpleTable = (List<WebElement)Driver.FindElement(By.ClassName("table table-striped"));
-
-            //List<WebElement> rows = simpleTable.FindElements(By.TagName("tr"));
-
             WebElement? deleteButton = (WebElement?)Driver.FindElement(By.XPath("//td[contains(text(),'SelniumTest@Test.com')]/following-sibling::td/descendant::form/button[contains(text(),'Delete')]")); 
 
             deleteButton?.Click();
