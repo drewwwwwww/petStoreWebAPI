@@ -45,9 +45,9 @@ namespace TestProject1
 
             passwordForm?.SendKeys("Password1!");
 
-            WebElement? passwrodConfirmForm = (WebElement?)(Driver.FindElement(By.Id("Input_ConfirmPassword")));
+            WebElement? passwordConfirmForm = (WebElement?)(Driver.FindElement(By.Id("Input_ConfirmPassword")));
 
-            passwrodConfirmForm?.SendKeys("Password1!");
+            passwordConfirmForm?.SendKeys("Password1!");
 
             WebElement? submitButton = (WebElement?)(Driver.FindElement(By.Id("registerSubmit")));
 
@@ -55,7 +55,46 @@ namespace TestProject1
 
             WebElement? userNameInTopRight = (WebElement?)(Driver.FindElement(By.XPath("//a[@title='Manage']")));
 
-            Assert.IsTrue(!userNameInTopRight.Text.Equals("SelniumTest@Test.com"));
+            Assert.IsTrue(!userNameInTopRight.Text.Equals("SeleniumTest@Test.com"));
+        }
+
+        [Test]
+        public void Delete_User_Method()
+        {
+            //login as admin
+
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FAdmin");
+
+            WebElement? emailForm = (WebElement?)(Driver.FindElement(By.Id("Input_Email")));
+
+            WebElement? passwordForm = (WebElement?)(Driver.FindElement(By.Id("Input_Password")));
+
+            WebElement? submitButton = (WebElement?)(Driver.FindElement(By.Id("login-submit")));
+
+            emailForm?.SendKeys("admin@admin.com");
+
+            passwordForm?.SendKeys("Admin1!");
+
+            submitButton.Click();
+
+            //go to and delete selenium test user
+
+            WebElement? maintainUsersButton = (WebElement?)Driver.FindElement(By.XPath("//a[text()='Maintain User Accounts']"));
+
+            maintainUsersButton?.Click();
+
+            //get correct button for the test user
+
+            //WebElement simpleTable = (List<WebElement)Driver.FindElement(By.ClassName("table table-striped"));
+
+            //List<WebElement> rows = simpleTable.FindElements(By.TagName("tr"));
+
+            WebElement? deleteButton = (WebElement?)Driver.FindElement(By.XPath("//td[contains(text(),'SelniumTest@Test.com')]/following-sibling::td/descendant::form/button[contains(text(),'Delete')]")); 
+
+            deleteButton?.Click();
+
+
+
         }
     }
 }
