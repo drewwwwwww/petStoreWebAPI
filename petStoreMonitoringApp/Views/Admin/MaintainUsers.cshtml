@@ -26,6 +26,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
                     <th scope="col">Manage</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -38,6 +39,9 @@
                         <td>@string.Join(" , ", user.Roles.ToList())</td>
                         <td>
                             <a class="btn btn-primary" asp-controller="Admin" asp-action="ManageUserRoles" asp-route-userId="@user.UserId">Manage Roles</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Admin" asp-action="ChangeEmail" asp-route-userId="@user.UserId">Manage Email</a>
                         </td>
                         <td>
                             <form method="post" asp-action="DeleteUser" asp-route-id="@user.UserId">

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using petStoreMonitoringApp.Models.ViewModels;
+using System.Diagnostics;
 
 namespace petStoreMonitoringApp.Controllers
 {
@@ -139,6 +140,64 @@ namespace petStoreMonitoringApp.Controllers
                 }
                 return View("MaintainUsers");
             }
+        }
+        #endregion
+
+        #region ChangeEmailGet
+        public async Task<ActionResult> ChangeEmail(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("NotFound");
+            }
+            var model = new MaintainEmailVM
+            {
+                UserId = user.Id,
+                Email = user.Email
+            };
+            return View(model);
+        }
+        #endregion
+
+        #region ChangeEmailPost
+        [HttpPost]
+        public async Task<ActionResult> ChangeEmail(MaintainEmailVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("MaintainUsers");
+            }
+
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.NormalizedEmail = model.Email.ToUpper();
+                user.UserName = model.Email;
+                user.NormalizedUserName = model.Email.ToUpper();
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("MaintainUsers");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+
+            return RedirectToAction("ManageUsers");
         }
         #endregion
     }
