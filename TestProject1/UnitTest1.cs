@@ -54,7 +54,13 @@ namespace TestProject1
             Assert.IsTrue(Driver.FindElement(By.XPath("/html/body/div/main/div[2]/a[2]")).Displayed);
 
             var button = Driver.FindElement(By.XPath("/html/body/div/main/div[2]/a[2]"));
+
+            button.Click();
+
+            Assert.That(Driver.Url == "http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FAdmin%2FIndex");
         }
+
+
 
         [Test]
         public void Register_Page_Creates_New_User()
