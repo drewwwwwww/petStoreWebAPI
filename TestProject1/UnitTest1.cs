@@ -33,6 +33,30 @@ namespace TestProject1
         }
 
         [Test]
+        public void User_Button_Routes_To_Correct_Page()
+        {
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
+            
+            Assert.IsTrue(Driver.FindElement(By.XPath("/ html / body / div / main / div[2] / a[1]")).Displayed);
+
+            var button = Driver.FindElement(By.XPath("/html/body/div/main/div[2]/a[1]"));
+
+            button.Click();
+
+            Assert.That(Driver.Url == "http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FUser%2FIndex");
+        }
+
+        [Test]
+        public void Admin_Button_Routes_To_Correct_Page()
+        {
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
+
+            Assert.IsTrue(Driver.FindElement(By.XPath("/html/body/div/main/div[2]/a[2]")).Displayed);
+
+            var button = Driver.FindElement(By.XPath("/html/body/div/main/div[2]/a[2]"));
+        }
+
+        [Test]
         public void Register_Page_Creates_New_User()
         {
             Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Register");
@@ -86,8 +110,6 @@ namespace TestProject1
             WebElement? deleteButton = (WebElement?)Driver.FindElement(By.XPath("//td[contains(text(),'SelniumTest@Test.com')]/following-sibling::td/descendant::form/button[contains(text(),'Delete')]")); 
 
             deleteButton?.Click();
-
-
 
         }
     }
