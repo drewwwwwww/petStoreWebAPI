@@ -18,7 +18,7 @@ namespace TestProject1
         [Test]
         public void Test1()
         {
-            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
+            Driver.Navigate().GoToUrl("https://localhost:7294/");
 
             Assert.IsTrue(Driver.FindElement(By.Id("registerPage")).Displayed);
         }
