@@ -30,7 +30,7 @@ jobs:
       run: dotnet build --no-restore
       
     - name: Run web app
-      run: dotnet run
+      run: dotnet run --project petStoreMonitoringApp/petStoreMonitoringApp.csproj
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
