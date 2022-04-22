@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,18 +22,6 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore
-      
-    - name: Download Chrome Driver
-      run: |
-        CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
-          && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}) \
-          && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" \
-          && cd /tmp \
-          && unzip chromedriver_linux64.zip \
-          && rm -rf chromedriver_linux64.zip \
-          && sudo mv chromedriver /usr/local/bin/chromedriver \
-          && sudo chmod +x /usr/local/bin/chromedriver \
-          && chromedriver --version
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
@@ -43,9 +31,3 @@ jobs:
 
     - name: Run functional tests
       run: vstest.console.exe "TestProject1/bin/Debug/net6.0/TestProject1.dll"
-      
-    - name: Run web app
-      run: dotnet run --project petStoreMonitoringApp/petStoreMonitoringApp.csproj --no-build
-      
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
