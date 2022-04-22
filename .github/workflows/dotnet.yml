@@ -35,9 +35,14 @@ jobs:
           && sudo chmod +x /usr/local/bin/chromedriver \
           && chromedriver --version
 
-      
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Add VSTest.console.exe to the PATH
+      uses: darenm/Setup-VSTest@v1
+
+    - name: Run functional tests
+      run: vstest.console.exe "TestProject1/bin/Debug/net6.0/TestProject1.dll"
       
     - name: Run web app
       run: dotnet run --project petStoreMonitoringApp/petStoreMonitoringApp.csproj --no-build
