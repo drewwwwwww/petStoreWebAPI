@@ -22,6 +22,8 @@ namespace TestProject1
             Driver.Navigate().GoToUrl("https://localhost:5001/");
 
             Assert.IsTrue(Driver.FindElement(By.Id("registerPage")).Displayed);
+
+            Driver.Close();
         }
 
         [Test]
@@ -30,6 +32,8 @@ namespace TestProject1
             Driver.Navigate().GoToUrl("https://localhost:5001/");
 
             Assert.IsTrue(Driver.FindElement(By.Id("loginPage")).Displayed);
+
+            Driver.Close();
         }
 
         [Test]
@@ -44,6 +48,8 @@ namespace TestProject1
             button.Click();
 
             Assert.That(Driver.Url == "https://localhost:5001/Identity/Account/Login?ReturnUrl=%2FUser%2FIndex");
+
+            Driver.Close();
         }
 
         [Test]
@@ -58,6 +64,8 @@ namespace TestProject1
             button.Click();
 
             Assert.That(Driver.Url == "https://localhost:5001/Identity/Account/Login?ReturnUrl=%2FAdmin%2FIndex");
+
+            Driver.Close();
         }
 
 
@@ -86,6 +94,8 @@ namespace TestProject1
             WebElement? userNameInTopRight = (WebElement?)(Driver.FindElement(By.XPath("//a[@title='Manage']")));
 
             Assert.IsTrue(!userNameInTopRight.Text.Equals("SeleniumTest@Test.com"));
+
+            Driver.Close();
         }
 
         [Test]
@@ -117,6 +127,7 @@ namespace TestProject1
 
             deleteButton?.Click();
 
+            Driver.Close();
         }
     }
 }
