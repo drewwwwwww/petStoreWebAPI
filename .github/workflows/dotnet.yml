@@ -25,15 +25,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
-    - name: Run Web App in background
+    - name: Run Web App in background and run tests
       run: |
         cd petStoreMonitoringApp
         dotnet build --configuration Release --no-restore
         Start-Process ./bin/Release/net6.0/petStoreMonitoringApp.exe -NoNewWindow -PassThru
         cd ..
-
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-
-    - name: Stop Web App
-      run: Stop-Process -name petStoreMonitoringApp
+        dotnet test --no-restore --verbosity normal
