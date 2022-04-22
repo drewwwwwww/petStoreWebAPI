@@ -24,12 +24,6 @@ jobs:
       run: dotnet restore
       
     - name: Download Chrome Driver
-      run: sudo apt-get -yqq install chromium-chromedriver
-      
-    - name: Build
-      run: dotnet build --no-restore
-      
-    - name: Run web app
       run: |
         CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
           && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}) \
@@ -40,6 +34,13 @@ jobs:
           && sudo mv chromedriver /usr/local/bin/chromedriver \
           && sudo chmod +x /usr/local/bin/chromedriver \
           && chromedriver --version
+
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Run web app
+      run: dotnet run --project petStoreMonitoringApp/petStoreMonitoringApp.csproj --no-build
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
