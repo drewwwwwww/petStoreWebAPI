@@ -19,16 +19,21 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    - name: Add VSTest.console.exe to the PATH
+      uses: darenm/Setup-VSTest@v1
+
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
-    - name: Run Web App in background and run tests
+    - name: Run Web App in background
       run: |
         cd petStoreMonitoringApp
         dotnet build --configuration Release --no-restore
         Start-Process ./bin/Release/net6.0/petStoreMonitoringApp.exe -NoNewWindow -PassThru
         cd ..
-        dotnet test --no-restore --verbosity normal
+
+    - name: Run functional tests
+      run: vstest.console.exe "TestProject1\bin\Release\net6.0\TestProject1.dll"

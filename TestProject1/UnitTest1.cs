@@ -19,7 +19,7 @@ namespace TestProject1
         [Test]
         public void Register_Button_Routes_To_Correct_Page()
         {
-            Driver.Navigate().GoToUrl("https://localhost:5001/");
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
 
             Assert.IsTrue(Driver.FindElement(By.Id("registerPage")).Displayed);
 
@@ -29,7 +29,7 @@ namespace TestProject1
         [Test]
         public void Login_Button_Routes_To_Correct_Page()
         {
-            Driver.Navigate().GoToUrl("https://localhost:5001/");
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
 
             Assert.IsTrue(Driver.FindElement(By.Id("loginPage")).Displayed);
 
@@ -39,7 +39,7 @@ namespace TestProject1
         [Test]
         public void User_Button_Routes_To_Correct_Page()
         {
-            Driver.Navigate().GoToUrl("https://localhost:5001/");
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
             
             Assert.IsTrue(Driver.FindElement(By.XPath("/ html / body / div / main / div[2] / a[1]")).Displayed);
 
@@ -47,7 +47,7 @@ namespace TestProject1
 
             button.Click();
 
-            Assert.That(Driver.Url == "https://localhost:5001/Identity/Account/Login?ReturnUrl=%2FUser%2FIndex");
+            Assert.That(Driver.Url == "http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FUser%2FIndex");
 
             Driver.Close();
         }
@@ -55,7 +55,7 @@ namespace TestProject1
         [Test]
         public void Admin_Button_Routes_To_Correct_Page()
         {
-            Driver.Navigate().GoToUrl("https://localhost:5001/");
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/");
 
             Assert.IsTrue(Driver.FindElement(By.XPath("/html/body/div/main/div[2]/a[2]")).Displayed);
 
@@ -63,7 +63,7 @@ namespace TestProject1
 
             button.Click();
 
-            Assert.That(Driver.Url == "https://localhost:5001/Identity/Account/Login?ReturnUrl=%2FAdmin%2FIndex");
+            Assert.That(Driver.Url == "http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FAdmin%2FIndex");
 
             Driver.Close();
         }
@@ -73,7 +73,7 @@ namespace TestProject1
         [Test]
         public void Register_Page_Creates_New_User()
         {
-            Driver.Navigate().GoToUrl("https://localhost:5001/Identity/Account/Register");
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Register");
 
             WebElement? emailForm = (WebElement?)(Driver.FindElement(By.Id("Input_Email")));
 
@@ -103,7 +103,7 @@ namespace TestProject1
         {
             //login as admin
 
-            Driver.Navigate().GoToUrl("https://localhost:5001/Identity/Account/Login?ReturnUrl=%2FAdmin");
+            Driver.Navigate().GoToUrl("http://monitoringmvcwebapp.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FAdmin");
 
             WebElement? emailForm = (WebElement?)(Driver.FindElement(By.Id("Input_Email")));
 
